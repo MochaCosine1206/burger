@@ -1,42 +1,82 @@
 const connection = require('./connection.js');
 
+function printQuestionMarks(num) {
+  var arr = [];
 
-module.exports = {
-function selectAll(body){
-    connection.query("INSERT INTO burgers (burger) VALUES (?)", [body], function(err, result) {
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+  return arr.toString();
+}
+
+function objToSql(ob) {
+  var arr = [];
+
+  for (var key in ob) {
+    var value = ob[key];
+
+    if (Object.hasOwnProperty.call(ob, key)) {
+      if (typeof value === "string" && value.indexOf(" ") >= 0) {
+        value = "'" + value + "'";
+      }
+      arr.push(key + "=" + value);
+    }
+  }
+  return arr.toString();
+}
+
+
+
+var orm = {
+  allBurgers: function (tableInput, cb) {
+    var queryString = "SELECT * FROM " + tableInput + ";";
+      connection.query(queryString, function (err, result) {
         if (err) {
-          return res.status(500).end();
+          throw err;
         }
-    
-        // Send back the ID of the new todo
-        res.json({ id: result.insertId });
-        console.log({ id: result.insertId });
+        cb(result);
       });
-}
+    },
+      insertOne: function (table, objColVals, condition, cb) {
+        var queryString = "INSERT INTO" + table;
 
-function insertOne(body){
-    connection.query("INSERT INTO burgers (burger) VALUES (?)", [body], function(err, result) {
-        if (err) {
-          return res.status(500).end();
-        }
-    
-        // Send back the ID of the new todo
-        res.json({ id: result.insertId });
-        console.log({ id: result.insertId });
-      });
-}
+        queryString += " (";
+        queryString += close.toString();
+        queryString += ") ";
+        queryString += "VALUES (";
+        queryString += printQuestionMarks(vals.Length);
+        queryString += ") ";
 
-function updateOne(body, id){
-    connection.query("UPDATE burgers SET burger = ? WHERE id = ?", [body, id], function(err, result) {
-        if (err) {
-          // If an error occurred, send a generic server failure
-          return res.status(500).end();
-        }
-        else if (result.changedRows === 0) {
-          // If no rows were changed, then the ID must not exist, so 404
-          return res.status(404).end();
-        }
-        res.status(200).end();
-}
+        console.log(queryString);
 
-}
+        connection.query(queryString, vals, function (err, result) {
+          if (err) {
+            throw err;
+          }
+
+          cb(result);
+        })
+      },
+      updateOne: function (table, objColVals, condition, cb) {
+        var queryString = "UPDATE" + table;
+
+        queryString += " SET ";
+        queryString += objToSql(objColVals);
+        queryString += " WHERE";
+        queryString += condition;
+
+        console.log(queryString);
+
+        connection.query(queryString, function (err, result) {
+          if (err) {
+            throw err;
+          }
+
+          cb(result);
+        });
+      }
+  };
+
+module.exports = orm;
+
+

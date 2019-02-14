@@ -1,40 +1,45 @@
 var express = require("express");
 
-var app = express();
+var router = express.Router();
 
 var burger = require('./models/burgers')
 
-// Set the port of our application
-// process.env.PORT lets the port be set by Heroku
-var PORT = process.env.PORT || 8080;
 
-// Parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+router.get("/", function (req, res) {
+  burger.allBurgers(function (data) {
+    var hbsObject = {
+      burgers: data
+    };
+    console.log(hbsObject);
+    res.render("index", hbsObject);
+  })
+});
 
-var exphbs = require("express-handlebars");
+// Create a new burger
+router.post("/api/burgers", function (req, res) {
+  burger.insertOne([
+    "burger_name", "devoured"
+  ], [
+      req.body.burger_name, req.body.devoured
+    ], function (result) {
+      res.json({ id: result.insertId });
+    })
+});
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+// Update a burger
+router.put("/api/burgers/:id", function (req, res) {
+  var devoured = "id = " + req.params.id
 
-app.get("/", function(req, res) {
-    burger.selectAll(req.body.burger)
+  console.log("devoured" + devoured)
+  burger.updateOne({
+    devoured: req.body.devoured
+  }, condition, function (result) {
+    if (result.changedRows = 0) {
+      return res.status(404).end();
+    } else {
+      res.status(200).end();
+    }
   });
-  
-  // Create a new burger
-  app.post("/burgers", function(req, res) {
-    burger.insertOne(req.body.burger);
-  });
-  
-  // Update a burger
-  app.put("/burgers/:id", function(req, res) {
-    burger.updateOne(req.body.burger, req.params.id)
-  });
-  
- 
-  
-  // Start our server so that it can begin listening to client requests.
-  app.listen(PORT, function() {
-    // Log (server-side) when our server has started
-    console.log("Server listening on: http://localhost:" + PORT);
-  });
+});
+
+module.exports = router;
