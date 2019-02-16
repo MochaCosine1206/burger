@@ -37,14 +37,14 @@ var orm = {
         cb(result);
       });
     },
-      insertOne: function (table, objColVals, condition, cb) {
-        var queryString = "INSERT INTO" + table;
+      insertOne: function (table, cols, vals, cb) {
+        var queryString = "INSERT INTO " + table;
 
         queryString += " (";
-        queryString += close.toString();
+        queryString += cols.toString();
         queryString += ") ";
         queryString += "VALUES (";
-        queryString += printQuestionMarks(vals.Length);
+        queryString += printQuestionMarks(vals.length);
         queryString += ") ";
 
         console.log(queryString);
@@ -58,11 +58,11 @@ var orm = {
         })
       },
       updateOne: function (table, objColVals, condition, cb) {
-        var queryString = "UPDATE" + table;
+        var queryString = "UPDATE " + table;
 
         queryString += " SET ";
         queryString += objToSql(objColVals);
-        queryString += " WHERE";
+        queryString += " WHERE ";
         queryString += condition;
 
         console.log(queryString);

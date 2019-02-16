@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/MochaCosine1206/burger.git"
   },
+  "scripts": {
+    "start": "node ./node_modules/nodemon/bin/nodemon.js server.js"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -19,6 +22,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.10"
   }
 }
