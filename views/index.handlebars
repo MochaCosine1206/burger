@@ -2,15 +2,16 @@
 <div class="container">
 <div class="row text-center">
   <div class="col-sm">
-<h1>Burgers!</h1>
+<h1>Eat Da Burger!!</h1>
+{{!-- <img src="/assets/img/Hamburger.svg"> --}}
 </div>
 </div>
 
 <div class="row text-center">
   <div class="col-sm">
-<h2>Burgers that have not been devoured!</h2>
+{{!-- <h2>Burgers that have not been devoured!</h2> --}}
 
-<ul>
+<ul class="list-group">
   {{#each burgers}}
   {{#unless devoured}}
   {{> burgers/burger-block devour=true}}
@@ -19,7 +20,7 @@
 </ul>
 </div>
 <div class="col-sm">
-<h2>Burgers that have been devoured!</h2>
+{{!-- <h2>Burgers that have been devoured!</h2> --}}
 
 <ul>
   {{#each burgers}}
@@ -43,11 +44,11 @@
   <input type="text" id="bg" name="burger_name">
 </div>
 
-<div class="form-group">
+{{!-- <div class="form-group">
   <label for="devo">Devoured?</label><br>
   <input type="radio" name="devoured" value="1" checked> Devoured! <br>
   <input type="radio" name="devoured" value="0"> Not Devoured
-</div>
+</div> --}}
 
 <button type="submit">Add Burger</button>
 </form>
@@ -81,7 +82,7 @@ $(function() {
 
     var newBurger = {
       burger_name: $("#bg").val().trim(),
-      devoured: $("[name=devoured]:checked").val().trim()
+      devoured: 0
     };
 
     $.ajax("/api/burgers", {
