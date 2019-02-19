@@ -1,5 +1,35 @@
+@import url("https://use.typekit.net/qlk4pws.css");
+
 body {
-    background-color: black;
-    background: url(/assets/img/Hamburger.svg) no-repeat center;
-    background-size: 600px 600px;
+    background: no-repeat center center fixed;
+    background-image: linear-gradient(pink, rgb(255, 255, 255));
+    background-size: cover;
+    height: 100%;
+}
+
+#topTitle {
+    font-family: "gothic-open-shaded", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 75px;
+}
+
+#buttons {
+    background-color: white;
+    border: 1px solid black;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#addBurger {
+    font-family: "quimby-mayoral", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+}
+
+.list-group-item {
+
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
 }

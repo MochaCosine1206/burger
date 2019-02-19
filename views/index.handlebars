@@ -2,13 +2,13 @@
 <div class="container">
 <div class="row text-center">
   <div class="col-sm">
-<h1>Eat Da Burger!!</h1>
-{{!-- <img src="/assets/img/Hamburger.svg"> --}}
+<h1 id="topTitle">Eat Da Burger!!</h1>
+
 </div>
 </div>
 
-<div class="row text-center">
-  <div class="col-sm">
+<div class="row text-center align-items-center">
+  <div class="col-sm align-middle">
 {{!-- <h2>Burgers that have not been devoured!</h2> --}}
 
 <ul class="list-group">
@@ -19,6 +19,10 @@
   {{/each}}
 </ul>
 </div>
+<div class="col-sm">
+<img src="/assets/img/Hamburger.svg">
+</div>
+
 <div class="col-sm">
 {{!-- <h2>Burgers that have been devoured!</h2> --}}
 
@@ -35,7 +39,7 @@
 
 <div class="row text-center">
 <div class="col-sm">
-<h2>Add a Burger!</h2>
+<h2 id="addBurger">Add a Burger!</h2>
 
 <form class="create-form">
 
@@ -44,14 +48,12 @@
   <input type="text" id="bg" name="burger_name">
 </div>
 
-{{!-- <div class="form-group">
-  <label for="devo">Devoured?</label><br>
-  <input type="radio" name="devoured" value="1" checked> Devoured! <br>
-  <input type="radio" name="devoured" value="0"> Not Devoured
-</div> --}}
-
-<button type="submit">Add Burger</button>
+<button type="submit" id="buttons">Add Burger</button>
 </form>
+<br>
+
+
+
 </div>
 </div>
 </div>
