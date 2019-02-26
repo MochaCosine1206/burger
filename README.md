@@ -1,5 +1,15 @@
 # Eat-Da-Burger
-This app lets users keep track of different burgers they would like to eat.  It demonstrates full-stack functionality, letting users add, and delete burgers.
+
+Ah, the classic Eat-Da-Burger App.  Moving burgers has never been so easy as to click a button.
+
+*But*  what is happening really?
+
+This app utilizes a full MVC, or Model View Controller, using api routes to update items in a database.  That's all folks.
+
+ - Create - Add a burger!
+ - Read - See the burgers!
+ - Update - Change the burgers!
+ - Delete - Functionality is invisible(nonexistant!)
 
 ![eatdaburger](https://user-images.githubusercontent.com/41648281/53094686-15830880-34d8-11e9-8270-4a9a98631c1a.gif)
 
